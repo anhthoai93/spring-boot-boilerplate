@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "aston-lecture.springboot.simple-tf-remote-state"
+    bucket = "andy.springboot.boilerplate-remote-state"
     key    = "terraform.tfstate"
-    region = "us-east-2"
+    region = "ap-southeast-1"
   }
 }
 
