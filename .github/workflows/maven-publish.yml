@@ -26,12 +26,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: my-artifact
-        path: target/*.jar
-        retention-days: 1
+    - name: Prepare S3 upload target
+      run: mkdir artifacts && cp target/*.jar artifacts/
 
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
