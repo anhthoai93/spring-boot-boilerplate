@@ -29,6 +29,20 @@ jobs:
     - name: Prepare S3 upload target
       run: mkdir artifacts && cp target/*.jar artifacts/
 
+    - name: install aws cli
+      run: sudo apt-get update && sudo apt-get install -y awscli
+
+    - name: Set up AWS credentials
+      run: |
+        mkdir -p ~/.aws
+        touch ~/.aws/credentials
+        echo "[default]
+        aws_access_key_id = ${AWS_ACCESS_KEY_ID}
+        aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
 #      env:
